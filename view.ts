@@ -25,5 +25,5 @@ export const view = (model: Model, dispatch: (msg: Msg) => void) =>
       model.error !== "" ? `Failed to fetch data (Error: ${model.error})`
       : model.isFetching ? "Loading..."
       : Equal.equals(model.pokemonData, pokemonDataStruct) ? ""
-      : JSON.stringify(model.pokemonData))
+      : JSON.stringify(model.pokemonData, null, 4))
   ])
