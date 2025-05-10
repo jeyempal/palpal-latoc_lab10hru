@@ -1,0 +1,19 @@
+{
+  "name": "pokepedia",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/jeyempal/palpal-latoc_lab10hru#readme",
+  "bugs": {
+    "url": "https://github.com/jeyempal/palpal-latoc_lab10hru/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jeyempal/palpal-latoc_lab10hru.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
