@@ -677,9 +677,16 @@ const root = document.getElementById("app");
 },{"./model":"lPixF","./view":"jcg5z","./update":"jYYJY","cs12242-mvu/src":"lHyd2"}],"lPixF":[function(require,module,exports,__globalThis) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "pokemonDataStruct", ()=>pokemonDataStruct);
 parcelHelpers.export(exports, "Model", ()=>Model);
 parcelHelpers.export(exports, "initModel", ()=>initModel);
 var _effect = require("effect");
+const pokemonDataStruct = {
+    "name": "",
+    "types": [],
+    "height": null,
+    "weight": null
+};
 const Model = (0, _effect.Schema).Struct({
     pokemonData: (0, _effect.Schema).Object,
     isFetching: (0, _effect.Schema).Boolean,
@@ -688,12 +695,7 @@ const Model = (0, _effect.Schema).Struct({
     text: (0, _effect.Schema).String
 });
 const initModel = Model.make({
-    pokemonData: {
-        "name": "",
-        "types": [],
-        "height": null,
-        "weight": null
-    },
+    pokemonData: pokemonDataStruct,
     isFetching: false,
     pokemon: "",
     error: "",
@@ -2033,7 +2035,7 @@ var _upstreamPullRequestJs = require("./UpstreamPullRequest.js");
 var _upstreamPullStrategyJs = require("./UpstreamPullStrategy.js");
 var _utilsJs = require("./Utils.js");
 
-},{"./Function.js":"21gOL","./Arbitrary.js":false,"./Array.js":"8L2Gk","./BigDecimal.js":false,"./BigInt.js":false,"./Boolean.js":false,"./Brand.js":false,"./Cache.js":false,"./Cause.js":false,"./Channel.js":false,"./ChildExecutorDecision.js":false,"./Chunk.js":false,"./Clock.js":false,"./Config.js":false,"./ConfigError.js":false,"./ConfigProvider.js":false,"./ConfigProviderPathPatch.js":false,"./Console.js":false,"./Context.js":false,"./Cron.js":false,"./Data.js":false,"./DateTime.js":false,"./DefaultServices.js":false,"./Deferred.js":false,"./Differ.js":false,"./Duration.js":false,"./Effect.js":"j5L8O","./Effectable.js":false,"./Either.js":false,"./Encoding.js":false,"./Equal.js":false,"./Equivalence.js":false,"./ExecutionStrategy.js":false,"./Exit.js":false,"./FastCheck.js":false,"./Fiber.js":false,"./FiberHandle.js":false,"./FiberId.js":false,"./FiberMap.js":false,"./FiberRef.js":false,"./FiberRefs.js":false,"./FiberRefsPatch.js":false,"./FiberSet.js":false,"./FiberStatus.js":false,"./GlobalValue.js":false,"./GroupBy.js":false,"./HKT.js":false,"./Hash.js":false,"./HashMap.js":false,"./HashSet.js":false,"./Inspectable.js":false,"./Iterable.js":false,"./JSONSchema.js":false,"./KeyedPool.js":false,"./Layer.js":false,"./LayerMap.js":false,"./List.js":false,"./LogLevel.js":false,"./LogSpan.js":false,"./Logger.js":false,"./Mailbox.js":false,"./ManagedRuntime.js":false,"./Match.js":"4Kq0F","./MergeDecision.js":false,"./MergeState.js":false,"./MergeStrategy.js":false,"./Metric.js":false,"./MetricBoundaries.js":false,"./MetricHook.js":false,"./MetricKey.js":false,"./MetricKeyType.js":false,"./MetricLabel.js":false,"./MetricPair.js":false,"./MetricPolling.js":false,"./MetricRegistry.js":false,"./MetricState.js":false,"./Micro.js":false,"./ModuleVersion.js":false,"./MutableHashMap.js":false,"./MutableHashSet.js":false,"./MutableList.js":false,"./MutableQueue.js":false,"./MutableRef.js":false,"./NonEmptyIterable.js":false,"./Number.js":false,"./Option.js":false,"./Order.js":false,"./Ordering.js":false,"./ParseResult.js":false,"./Pipeable.js":false,"./Pool.js":false,"./Predicate.js":false,"./Pretty.js":false,"./PrimaryKey.js":false,"./PubSub.js":false,"./Queue.js":false,"./Random.js":false,"./RateLimiter.js":false,"./RcMap.js":false,"./RcRef.js":false,"./Readable.js":false,"./Record.js":false,"./RedBlackTree.js":false,"./Redacted.js":false,"./Ref.js":false,"./RegExp.js":false,"./Reloadable.js":false,"./Request.js":false,"./RequestBlock.js":false,"./RequestResolver.js":false,"./Resource.js":false,"./Runtime.js":false,"./RuntimeFlags.js":false,"./RuntimeFlagsPatch.js":false,"./STM.js":false,"./Schedule.js":false,"./ScheduleDecision.js":false,"./ScheduleInterval.js":false,"./ScheduleIntervals.js":false,"./Scheduler.js":false,"./Schema.js":"1qGF0","./SchemaAST.js":false,"./Scope.js":false,"./ScopedCache.js":false,"./ScopedRef.js":false,"./Secret.js":false,"./SingleProducerAsyncInput.js":false,"./Sink.js":false,"./SortedMap.js":false,"./SortedSet.js":false,"./Stream.js":false,"./StreamEmit.js":false,"./StreamHaltStrategy.js":false,"./Streamable.js":false,"./String.js":"606wn","./Struct.js":false,"./Subscribable.js":false,"./SubscriptionRef.js":false,"./Supervisor.js":false,"./Symbol.js":false,"./SynchronizedRef.js":false,"./TArray.js":false,"./TDeferred.js":false,"./TMap.js":false,"./TPriorityQueue.js":false,"./TPubSub.js":false,"./TQueue.js":false,"./TRandom.js":false,"./TReentrantLock.js":false,"./TRef.js":false,"./TSemaphore.js":false,"./TSet.js":false,"./TSubscriptionRef.js":false,"./Take.js":false,"./TestAnnotation.js":false,"./TestAnnotationMap.js":false,"./TestAnnotations.js":false,"./TestClock.js":false,"./TestConfig.js":false,"./TestContext.js":false,"./TestLive.js":false,"./TestServices.js":false,"./TestSized.js":false,"./Tracer.js":false,"./Trie.js":false,"./Tuple.js":false,"./Types.js":false,"./Unify.js":false,"./UpstreamPullRequest.js":false,"./UpstreamPullStrategy.js":false,"./Utils.js":false,"@parcel/transformer-js/src/esmodule-helpers.js":"fF6sh"}],"21gOL":[function(require,module,exports,__globalThis) {
+},{"./Function.js":"21gOL","./Arbitrary.js":false,"./Array.js":"8L2Gk","./BigDecimal.js":false,"./BigInt.js":false,"./Boolean.js":false,"./Brand.js":false,"./Cache.js":false,"./Cause.js":false,"./Channel.js":false,"./ChildExecutorDecision.js":false,"./Chunk.js":false,"./Clock.js":false,"./Config.js":false,"./ConfigError.js":false,"./ConfigProvider.js":false,"./ConfigProviderPathPatch.js":false,"./Console.js":false,"./Context.js":false,"./Cron.js":false,"./Data.js":false,"./DateTime.js":false,"./DefaultServices.js":false,"./Deferred.js":false,"./Differ.js":false,"./Duration.js":false,"./Effect.js":"j5L8O","./Effectable.js":false,"./Either.js":false,"./Encoding.js":false,"./Equal.js":"gA0qD","./Equivalence.js":false,"./ExecutionStrategy.js":false,"./Exit.js":false,"./FastCheck.js":false,"./Fiber.js":false,"./FiberHandle.js":false,"./FiberId.js":false,"./FiberMap.js":false,"./FiberRef.js":false,"./FiberRefs.js":false,"./FiberRefsPatch.js":false,"./FiberSet.js":false,"./FiberStatus.js":false,"./GlobalValue.js":false,"./GroupBy.js":false,"./HKT.js":false,"./Hash.js":false,"./HashMap.js":false,"./HashSet.js":false,"./Inspectable.js":false,"./Iterable.js":false,"./JSONSchema.js":false,"./KeyedPool.js":false,"./Layer.js":false,"./LayerMap.js":false,"./List.js":false,"./LogLevel.js":false,"./LogSpan.js":false,"./Logger.js":false,"./Mailbox.js":false,"./ManagedRuntime.js":false,"./Match.js":"4Kq0F","./MergeDecision.js":false,"./MergeState.js":false,"./MergeStrategy.js":false,"./Metric.js":false,"./MetricBoundaries.js":false,"./MetricHook.js":false,"./MetricKey.js":false,"./MetricKeyType.js":false,"./MetricLabel.js":false,"./MetricPair.js":false,"./MetricPolling.js":false,"./MetricRegistry.js":false,"./MetricState.js":false,"./Micro.js":false,"./ModuleVersion.js":false,"./MutableHashMap.js":false,"./MutableHashSet.js":false,"./MutableList.js":false,"./MutableQueue.js":false,"./MutableRef.js":false,"./NonEmptyIterable.js":false,"./Number.js":false,"./Option.js":false,"./Order.js":false,"./Ordering.js":false,"./ParseResult.js":false,"./Pipeable.js":false,"./Pool.js":false,"./Predicate.js":false,"./Pretty.js":false,"./PrimaryKey.js":false,"./PubSub.js":false,"./Queue.js":false,"./Random.js":false,"./RateLimiter.js":false,"./RcMap.js":false,"./RcRef.js":false,"./Readable.js":false,"./Record.js":false,"./RedBlackTree.js":false,"./Redacted.js":false,"./Ref.js":false,"./RegExp.js":false,"./Reloadable.js":false,"./Request.js":false,"./RequestBlock.js":false,"./RequestResolver.js":false,"./Resource.js":false,"./Runtime.js":false,"./RuntimeFlags.js":false,"./RuntimeFlagsPatch.js":false,"./STM.js":false,"./Schedule.js":false,"./ScheduleDecision.js":false,"./ScheduleInterval.js":false,"./ScheduleIntervals.js":false,"./Scheduler.js":false,"./Schema.js":"1qGF0","./SchemaAST.js":false,"./Scope.js":false,"./ScopedCache.js":false,"./ScopedRef.js":false,"./Secret.js":false,"./SingleProducerAsyncInput.js":false,"./Sink.js":false,"./SortedMap.js":false,"./SortedSet.js":false,"./Stream.js":false,"./StreamEmit.js":false,"./StreamHaltStrategy.js":false,"./Streamable.js":false,"./String.js":"606wn","./Struct.js":false,"./Subscribable.js":false,"./SubscriptionRef.js":false,"./Supervisor.js":false,"./Symbol.js":false,"./SynchronizedRef.js":false,"./TArray.js":false,"./TDeferred.js":false,"./TMap.js":false,"./TPriorityQueue.js":false,"./TPubSub.js":false,"./TQueue.js":false,"./TRandom.js":false,"./TReentrantLock.js":false,"./TRef.js":false,"./TSemaphore.js":false,"./TSet.js":false,"./TSubscriptionRef.js":false,"./Take.js":false,"./TestAnnotation.js":false,"./TestAnnotationMap.js":false,"./TestAnnotations.js":false,"./TestClock.js":false,"./TestConfig.js":false,"./TestContext.js":false,"./TestLive.js":false,"./TestServices.js":false,"./TestSized.js":false,"./Tracer.js":false,"./Trie.js":false,"./Tuple.js":false,"./Types.js":false,"./Unify.js":false,"./UpstreamPullRequest.js":false,"./UpstreamPullStrategy.js":false,"./Utils.js":false,"@parcel/transformer-js/src/esmodule-helpers.js":"fF6sh"}],"21gOL":[function(require,module,exports,__globalThis) {
 /**
  * Tests if a value is a `function`.
  *
@@ -55710,7 +55712,9 @@ const keys = (o)=>Object.keys(o);
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "view", ()=>view);
+var _effect = require("effect");
 var _msg = require("./msg");
+var _model = require("./model");
 var _src = require("cs12242-mvu/src");
 const view = (model, dispatch)=>(0, _src.h)("div", [
         (0, _src.h)("input", {
@@ -55728,10 +55732,10 @@ const view = (model, dispatch)=>(0, _src.h)("div", [
                     }))
             }
         }, "Search"),
-        (0, _src.h)("pre", model.error !== "" ? `Failed to fetch data (Error: ${model.error})` : model.isFetching ? "Loading..." : JSON.stringify(model.pokemonData))
+        (0, _src.h)("pre", model.error !== "" ? `Failed to fetch data (Error: ${model.error})` : model.isFetching ? "Loading..." : (0, _effect.Equal).equals(model.pokemonData, (0, _model.pokemonDataStruct)) ? "" : JSON.stringify(model.pokemonData))
     ]);
 
-},{"cs12242-mvu/src":"lHyd2","@parcel/transformer-js/src/esmodule-helpers.js":"fF6sh","./msg":"4c31j"}],"lHyd2":[function(require,module,exports,__globalThis) {
+},{"cs12242-mvu/src":"lHyd2","@parcel/transformer-js/src/esmodule-helpers.js":"fF6sh","./msg":"4c31j","effect":"613jd","./model":"lPixF"}],"lHyd2":[function(require,module,exports,__globalThis) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "startSimple", ()=>startSimple);
