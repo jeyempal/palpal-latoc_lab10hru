@@ -6,7 +6,11 @@ export const Msg = S.Union(
     pokemon: S.String
   }),
   S.TaggedStruct("MsgGotPokemon", {
-    pokemonData: S.Object
+    name: S.String,
+    types: S.String,
+    height: S.Number,
+    weight: S.Number,
+    imgLink: S.String,
   }),
   S.TaggedStruct("MsgError", {
     error: S.String

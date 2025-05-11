@@ -1,6 +1,6 @@
 import { Match, Array, String } from "effect"
 import { Msg, MsgGotPokemon, MsgError } from "./msg"
-import { Model } from "./model"
+import { Model, pokemonDataStruct } from "./model"
 import { Cmd } from "cs12242-mvu/src"
 
 export const update = (msg: Msg, model: Model): Model | { model: Model; cmd: Cmd<Msg> } =>
@@ -10,44 +10,61 @@ export const update = (msg: Msg, model: Model): Model | { model: Model; cmd: Cmd
             model: Model.make({
                 ...model,
                 isFetching: true,
-                error: ""
+                error: "",
+                pokemonData: null
             }),
             cmd: Cmd.ofSub(async (dispatch: (msg: Msg) => void) => {
                 try {
+
                     const resp = await fetch(
                         `https://pokeapi.upd-dcs.work/api/v2/pokemon/${String.toLowerCase(pokemon)}`,
                     )
                     const data = await resp.text()
                     const obj = JSON.parse(data)
 
-                    let types: string[] = []
+                    let stringType = ""
                     for (const type of obj.types) {
-                        types = Array.append(types, type.type.name)
+                        if (type.slot === 1) {
+                            stringType = String.concat(stringType, type.type.name)
+                        } else {
+                            stringType = String.concat(stringType, ` | ${type.type.name}`)
+                        }
                     }
 
-                    const newPokemonData = {
-                        "name": obj.name,
-                        "types": types,
-                        "height": obj.height,
-                        "weight": obj.weight,
-                    }
 
-                    dispatch(MsgGotPokemon.make({ pokemonData: newPokemonData }))
+
+                    const imgLink = obj.sprites.front_default
+
+                    dispatch(MsgGotPokemon.make({ 
+                        name: obj.name,
+                        types: stringType,
+                        height: obj.height / 10,
+                        weight: obj.weight / 10,
+                        imgLink: imgLink
+                     }))
                 } catch (e) {
-                    dispatch(MsgError.make({ error: `Error: ${e}` }))
+                    dispatch(MsgError.make({ error: `${e}` }))
                 }
             }),
         })}),
-        Match.tag("MsgGotPokemon", ({ pokemonData }) => 
+        Match.tag("MsgGotPokemon", ({ name, types, height, weight, imgLink }) => 
             Model.make({
                 ...model,
                 isFetching: false,
-                pokemonData: pokemonData,
+                pokemonData: pokemonDataStruct.make({
+                    name: name,
+                    types: types,
+                    height: height,
+                    weight: weight,
+                    imgLink: imgLink
+                }),
             })
         ),
         Match.tag("MsgError", ({ error }) =>
             Model.make({
                 ...model,
+                pokemonData: null,
+                isFetching: false,
                 error: error,
             })
         ),
