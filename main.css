@@ -1,0 +1,36 @@
+
+.pixelify-sans-font {
+  font-family: "Pixelify Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+
+h1, h3 {
+    font-family: "Pixelify Sans";
+}
+
+p {
+    font-family: Arial, Helvetica, sans-serif;
+    color: rgb(88, 88, 88);
+}
+
+label {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.card {
+    display: flex;
+    align-items: center;
+    gap: 2em;
+    margin: 1em 2em;
+    padding: 1em;
+    justify-content: space-around;
+    background-color: rgb(203, 213, 225);
+}
+
+.deck {
+    display: grid;
+    grid-template-columns: auto auto auto;
+}

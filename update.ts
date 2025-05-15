@@ -1,78 +1,91 @@
-import { Match, Array, String } from "effect"
-import { Msg, MsgGotPokemon, MsgError } from "./msg"
+import { Match, Array, pipe, Order, HashSet, HashMap } from "effect"
+import { Msg, MsgGotPokemon, MsgError, MsgFetchPokemon, MsgGenerations } from "./msg"
 import { Model, pokemonDataStruct } from "./model"
+import { fetchPokemonByGeneration, fetchPokemon } from "./fetch"
 import { Cmd } from "cs12242-mvu/src"
 
 export const update = (msg: Msg, model: Model): Model | { model: Model; cmd: Cmd<Msg> } =>
     Match.value(msg).pipe(
-        Match.tag("MsgFetchPokemon", ({ pokemon }) => {
+        Match.tag("MsgFetchPokemon", ({ text, generations }) => {
             return ({
             model: Model.make({
                 ...model,
                 isFetching: true,
                 error: "",
-                pokemonData: null
+                pokemonData: []
             }),
             cmd: Cmd.ofSub(async (dispatch: (msg: Msg) => void) => {
                 try {
+                    // let pokemonList: any[] = []
+                    // let pokemonDataList: any[] = []
 
-                    const resp = await fetch(
-                        `https://pokeapi.upd-dcs.work/api/v2/pokemon/${String.toLowerCase(pokemon)}`,
-                    )
-                    const data = await resp.text()
-                    const obj = JSON.parse(data)
-
-                    let stringType = ""
-                    for (const type of obj.types) {
-                        if (type.slot === 1) {
-                            stringType = String.concat(stringType, type.type.name)
-                        } else {
-                            stringType = String.concat(stringType, ` | ${type.type.name}`)
-                        }
-                    }
-
-
-
-                    const imgLink = obj.sprites.front_default
-
+                    const pokemonList = await fetchPokemonByGeneration(generations, text)
+                    const pokemonDataList = await fetchPokemon(pokemonList)
+                    
                     dispatch(MsgGotPokemon.make({ 
-                        name: obj.name,
-                        types: stringType,
-                        height: obj.height / 10,
-                        weight: obj.weight / 10,
-                        imgLink: imgLink
-                     }))
+                            pokemonDataList
+                        }))
                 } catch (e) {
+                    console.log(e)
                     dispatch(MsgError.make({ error: `${e}` }))
                 }
             }),
         })}),
-        Match.tag("MsgGotPokemon", ({ name, types, height, weight, imgLink }) => 
+        Match.tag("MsgGotPokemon", ({ pokemonDataList }) => 
             Model.make({
                 ...model,
                 isFetching: false,
-                pokemonData: pokemonDataStruct.make({
-                    name: name,
-                    types: types,
-                    height: height,
-                    weight: weight,
-                    imgLink: imgLink
-                }),
+                pokemonData: pipe(
+                    pokemonDataList,
+                    Array.sortBy(
+                        Order.mapInput(Order.number, (p: (typeof pokemonDataStruct)[number]) => p.id)
+                    )
+                ),
             })
         ),
         Match.tag("MsgError", ({ error }) =>
             Model.make({
                 ...model,
-                pokemonData: null,
+                pokemonData: [],
                 isFetching: false,
                 error: error,
             })
         ),
-        Match.tag("MsgType", ({ text }) =>
-            Model.make({
+        Match.tag("MsgType", ({ text }) => {
+            return ({
+            model: Model.make({
                 ...model,
-                text,
+                text: text,}),
+            cmd: Cmd.ofSub(async (dispatch: (msg: Msg) => void) => {
+                dispatch(MsgFetchPokemon.make({ text: text, generations: model.generations }))
+            })
+            })
+        }),
+        Match.tag("MsgFilter", ({ generationNumber }) => {
+            return ({
+                model: Model.make({
+                ...model,
             }),
+                cmd: Cmd.ofSub(async (dispatch: (msg: Msg) => void) => {
+                    const newCheckboxes = HashMap.set(model.checkboxes, generationNumber, !HashMap.unsafeGet(model.checkboxes, generationNumber))
+                    const newGenerations = HashSet.make(...Array.filter(Array.range(1, 9), (n) => HashMap.unsafeGet(newCheckboxes, n)))
+                    dispatch(MsgGenerations.make({ generations: newGenerations, checkboxes: newCheckboxes }))
+            })
+            })
+        }
+        ),
+        Match.tag("MsgGenerations", ({ generations, checkboxes }) => {
+            return ({
+            model: Model.make({
+                ...model,
+                generations: generations,
+                checkboxes: checkboxes,
+            }),
+            cmd: Cmd.ofSub(async (dispatch: (msg: Msg) => void) => {
+                dispatch(MsgFetchPokemon.make({ text: model.text, generations: generations }))
+            })
+            })
+        }
         ),
         Match.exhaustive,
     )

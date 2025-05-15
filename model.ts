@@ -1,26 +1,36 @@
-import { Schema as S } from "effect"
+import { Schema as S, HashSet, HashMap } from "effect"
 
 export const pokemonDataStruct = S.Struct({
     name: S.String,
     types: S.String,
-    height: S.Union(S.Number, S.Null),
-    weight: S.Union(S.Number, S.Null),
-    imgLink: S.Union(S.String, S.Null)
+    height: S.Number,
+    weight: S.Number,
+    imgLink: S.String,
+    id: S.Number
 })
 export type pokemonDataStruct = typeof pokemonDataStruct
 
 export const Model = S.Struct({
-    pokemonData: S.Union(pokemonDataStruct, S.Null),
+    pokemonData: S.Array(S.Object),
     isFetching: S.Boolean,
     error: S.String,
-    text: S.String
+    text: S.String,
+    generations: S.HashSet(S.Number),
+    checkboxes: S.HashMap({
+        key: S.Int,
+        value: S.Boolean
+    }),
 })
 export type Model = typeof Model.Type
 
 export const initModel = Model.make({
-    pokemonData: null,
+    pokemonData: [],
     isFetching: false,
     error: "",
-    text: ""
+    text: "",
+    generations: HashSet.make(1),
+    checkboxes: HashMap.make(
+        [1, true], [2, false], [3, false], [4, false], [5, false], [6, false], [7, false], [8, false], [9, false], 
+    ),
 })
 
