@@ -16,12 +16,8 @@ export const update = (msg: Msg, model: Model): Model | { model: Model; cmd: Cmd
             }),
             cmd: Cmd.ofSub(async (dispatch: (msg: Msg) => void) => {
                 try {
-                    // let pokemonList: any[] = []
-                    // let pokemonDataList: any[] = []
-
                     const pokemonList = await fetchPokemonByGeneration(generations, text)
                     const pokemonDataList = await fetchPokemon(pokemonList)
-                    
                     dispatch(MsgGotPokemon.make({ 
                             pokemonDataList
                         }))
