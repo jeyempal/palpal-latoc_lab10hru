@@ -1,14 +1,19 @@
 import { Equal, pipe, Array, HashMap } from "effect"
-import { Msg, MsgFetchPokemon, MsgType, MsgFilter } from "./msg"
+import { Msg, MsgType, MsgFilter } from "./msg"
 import { Model } from "./model"
 import { h } from "cs12242-mvu/src"
- 
+
 export const view = (model: Model, dispatch: (msg: Msg) => void) =>
     h("div", [
         // input test
         h("input", {
             type: "text",
             on: { input: (e) => dispatch(MsgType.make({ text: (e.target as HTMLInputElement).value, })) },
+            props: {
+                placeholder: "Enter pokemon name",
+                id: "search"
+            },
+            
             }
         ),
 

@@ -1,3 +1,11 @@
+body {
+    padding: 2em;
+}
+
+#search {
+    margin: 1em 2em;
+    padding: 0.5em;
+}
 
 .pixelify-sans-font {
   font-family: "Pixelify Sans", sans-serif;
@@ -23,11 +31,12 @@ label {
 .card {
     display: flex;
     align-items: center;
-    gap: 2em;
     margin: 1em 2em;
     padding: 1em;
     justify-content: space-around;
-    background-color: rgb(203, 213, 225);
+    border: solid 1px;
+    border-radius: 10px;
+    box-shadow: 2px 2px;
 }
 
 .deck {
