@@ -49,7 +49,6 @@ export async function fetchPokemon(pokemonList: any[]) {
     for (const resp of responsesPokemon) {
         try {
         const data = await resp.json()
-        console.log(data.name)
         let stringType = ""
         for (const type of data.types) {
             if (type.slot === 1) {
