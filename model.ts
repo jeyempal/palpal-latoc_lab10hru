@@ -28,9 +28,9 @@ export const initModel = Model.make({
     isFetching: false,
     error: "",
     text: "",
-    generations: HashSet.empty(),
+    generations: HashSet.make(1),
     checkboxes: HashMap.make(
-        [1, false], [2, false], [3, false], [4, false], [5, false], [6, false], [7, false], [8, false], [9, false], 
+        [1, true], [2, false], [3, false], [4, false], [5, false], [6, false], [7, false], [8, false], [9, false], 
     ),
 })
 
